@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.Timer;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -25,31 +27,31 @@ public class MainActivity extends AppCompatActivity {
         Button button = findViewById(R.id.button);
         Button button2 = findViewById(R.id.button2);
 
-        CountDownTimer initialCountDownTimer1 = new CountDownTimer(millisInFuture, countDownInterval) {
-            @Override
-            public void onTick(long millisUntilFinished) {
-                textView.setText("Seconds Remaining: " + millisUntilFinished / countDownInterval);
-                timerInfo.setMillisUntilFinished((int) millisUntilFinished);
-            }
-
-            @Override
-            public void onFinish() {
-                textView.setText("Time Up!");
-            }
-        };
-
-        CountDownTimer initialCountDownTimer2 = new CountDownTimer(millisInFuture, countDownInterval) {
-            @Override
-            public void onTick(long millisUntilFinished) {
-                textView2.setText("Seconds Remaining: " + millisUntilFinished / countDownInterval);
-                timerInfo2.setMillisUntilFinished((int) millisUntilFinished);
-            }
-
-            @Override
-            public void onFinish() {
-                textView2.setText("Time Up!");
-            }
-        };
+//        CountDownTimer initialCountDownTimer = new CountDownTimer(millisInFuture, countDownInterval) {
+//            @Override
+//            public void onTick(long millisUntilFinished) {
+//                textView.setText("" + millisUntilFinished / countDownInterval);
+//                timerInfo.setMillisUntilFinished((int) millisUntilFinished);
+//            }
+//
+//            @Override
+//            public void onFinish() {
+//                textView.setText("Time Up!");
+//            }
+//        };
+//
+//        CountDownTimer initialCountDownTimer2 = new CountDownTimer(millisInFuture, countDownInterval) {
+//            @Override
+//            public void onTick(long millisUntilFinished) {
+//                textView2.setText("" + millisUntilFinished / countDownInterval);
+//                timerInfo2.setMillisUntilFinished((int) millisUntilFinished);
+//            }
+//
+//            @Override
+//            public void onFinish() {
+//                textView2.setText("Time Up!");
+//            }
+//        };
 
 //        final Player player1 = new Player(new CountDownTimer(millisInFuture, countDownInterval) {
 //            @Override
@@ -77,10 +79,17 @@ public class MainActivity extends AppCompatActivity {
 //            }
 //        });
 
-        final Player player1 = new Player(initialCountDownTimer1);
+        final Player player1 = new Player(initialCountDownTimer);
         final Player player2 = new Player(initialCountDownTimer2);
 
+        player1.setTextViewNum(textView);
+        player1.setTimerInfo(timerInfo);
+
+        player2.setTextViewNum(textView2);
+        player2.setTimerInfo(timerInfo2);
+
         player1.setTurn(true);
+        player2.setTurn(false);
 
         //final BetterTimer testTimer = new BetterTimer(60000);
         // Player player1 = new Player(testTimer, testTimer.getMillisRemaining())
@@ -106,6 +115,7 @@ public class MainActivity extends AppCompatActivity {
                 if (checkIfEmptyText(textView2)) {
                     player2.startTimer();
                 } else {
+                    Player.BetterTimer
                     player2.setTimeRemaining(timerInfo2);
                 }
             }
@@ -258,6 +268,8 @@ public class MainActivity extends AppCompatActivity {
         private CountDownTimer initialTimer;
         private CountDownTimer newTimer;
         private int countDownInterval = 1000;
+        private TextView textView;
+        private TimerInfo timerInfo;
 
         public Player(CountDownTimer timer) {
             this.initialTimer = timer;
@@ -283,10 +295,48 @@ public class MainActivity extends AppCompatActivity {
             this.initialTimer.start();
         }
 
+        public void startNewTimer() {
+            this.newTimer.start();
+        }
+
+        public void setNewTimer(BetterTimer newTimer){
+            this.newTimer = newTimer.newTimer(this.getTimeRemaining(), countDownInterval, this.textView, this.timerInfo);
+        }
+
         public void resumeTimer(){
-            int remainingTime = getTimeRemaining();
 
 
+
+        }
+
+        public void setTextViewNum(TextView textView){
+            this.textView = textView;
+        }
+
+        public void setTimerInfo(TimerInfo timerInfo){
+            this.timerInfo = timerInfo;
+        }
+
+        public class BetterTimer{
+
+            public BetterTimer() {
+            }
+
+            public CountDownTimer newTimer(int millisInFuture, final int countDownInterval, final TextView textView, final TimerInfo timerInfo){
+                CountDownTimer newTimer = new CountDownTimer(millisInFuture, countDownInterval) {
+                    @Override
+                    public void onTick(long millisUntilFinished) {
+                        textView.setText("" + millisUntilFinished / countDownInterval);
+                        timerInfo.setMillisUntilFinished((int) millisUntilFinished);
+                    }
+
+                    @Override
+                    public void onFinish() {
+                        textView.setText("Time Up!");
+                    }
+                };
+                return newTimer;
+            }
         }
 
 //        private CountDownTimer newTimer(){
