@@ -4,71 +4,187 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="@color/Gray">
+
 
     <Button
         android:id="@+id/button"
+        style="@android:style/Widget.Holo.Button.Borderless"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:text="Player 1"
+        android:layout_height="180dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/Gray"
+        android:hint="Player 1"
+        android:textColor="@android:color/black"
+        android:textSize="88sp"
+        android:typeface="serif"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
         tools:layout_editor_absoluteX="8dp" />
 
     <Button
         android:id="@+id/button2"
+        style="@android:style/Widget.Holo.Button.Borderless"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="180dp"
+        android:layout_marginBottom="8dp"
+        android:background="@color/Gray"
+        android:hint="Player 2"
         android:rotation="180"
-        android:text="Player 2"
+        android:textColor="@android:color/black"
+        android:textSize="88sp"
+        android:typeface="serif"
+        app:layout_constraintBottom_toBottomOf="@+id/button"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
         tools:layout_editor_absoluteX="8dp" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:textSize="36sp"
-        app:layout_constraintBottom_toTopOf="@+id/button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:text="Timer" />
+    <!--<TextView-->
+        <!--android:id="@+id/textView"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginStart="8dp"-->
+        <!--android:layout_marginTop="8dp"-->
+        <!--android:layout_marginBottom="8dp"-->
+        <!--android:textSize="36sp"-->
+        <!--app:layout_constraintBottom_toTopOf="@+id/button"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintTop_toBottomOf="@+id/resetButton"-->
+        <!--tools:text="Timer" />-->
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
+    <!--<TextView-->
+        <!--android:id="@+id/textView2"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginTop="8dp"-->
+        <!--android:layout_marginEnd="8dp"-->
+        <!--android:layout_marginBottom="8dp"-->
+        <!--android:rotation="180"-->
+        <!--android:textSize="36sp"-->
+        <!--app:layout_constraintBottom_toTopOf="@+id/resetButton"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintTop_toBottomOf="@+id/button2"-->
+        <!--tools:text="Timer" />-->
+
+    <Button
+        android:id="@+id/firstTurnbutton"
+        style="@android:style/Widget.Holo.Button"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:rotation="180"
-        android:textSize="36sp"
+        android:layout_marginBottom="24dp"
+        android:background="@color/Gray"
+        android:hint="PRESS FOR FIRST TURN"
+        android:textColor="@android:color/black"
+        android:textColorHighlight="@color/White"
+        android:textSize="24sp"
+        android:typeface="monospace"
+        app:layout_constraintBottom_toTopOf="@+id/button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button2"
-        tools:text="Timer" />
-
-    <Button
-        android:id="@+id/firstTurnbutton"
-        android:layout_width="102dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="24dp"
-        android:text="First Turn"
-        app:layout_constraintBottom_toTopOf="@+id/button"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/firstTurnButton2"
-        android:layout_width="wrap_content"
+        style="@android:style/Widget.Holo.Button"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@color/Gray"
+        android:elevation="60sp"
+        android:hint="PRESS FOR FIRST TURN"
         android:rotation="180"
-        android:text="First Turn"
+        android:textColor="@android:color/black"
+        android:textColorHighlight="@color/White"
+        android:textSize="24sp"
+        android:typeface="monospace"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button2" />
+        app:layout_constraintTop_toBottomOf="@+id/button2"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/resetButton"
+        style="@android:style/Widget.Holo.Button"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:elevation="50dp"
+        app:layout_constraintBottom_toTopOf="@+id/firstTurnbutton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/firstTurnButton2"
+        tools:text="RST" />
+
+    <!--<TextView-->
+        <!--android:id="@+id/textView"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginStart="8dp"-->
+        <!--android:layout_marginTop="8dp"-->
+        <!--android:layout_marginEnd="8dp"-->
+        <!--android:text="@string/reset"-->
+        <!--app:layout_constraintBottom_toTopOf="@+id/firstTurnbutton"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintTop_toBottomOf="@+id/resetButton"-->
+        <!--app:layout_constraintVertical_bias="0.0" />-->
+
+    <!--<TextView-->
+        <!--android:id="@+id/textView2"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginStart="8dp"-->
+        <!--android:layout_marginEnd="8dp"-->
+        <!--android:layout_marginBottom="8dp"-->
+        <!--android:rotation="180"-->
+        <!--android:text="@string/reset"-->
+        <!--app:layout_constraintBottom_toTopOf="@+id/resetButton"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintTop_toBottomOf="@+id/firstTurnButton2"-->
+        <!--app:layout_constraintVertical_bias="1.0" />-->
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:rotation="90"
+        android:text="@string/reset"
+        android:typeface="monospace"
+        app:layout_constraintBottom_toTopOf="@+id/firstTurnbutton"
+        app:layout_constraintEnd_toStartOf="@+id/resetButton"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/firstTurnButton2" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:rotation="270"
+        android:text="@string/reset"
+        android:typeface="monospace"
+        app:layout_constraintBottom_toTopOf="@+id/firstTurnbutton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/resetButton"
+        app:layout_constraintTop_toBottomOf="@+id/firstTurnButton2" />
 
 </android.support.constraint.ConstraintLayout>
