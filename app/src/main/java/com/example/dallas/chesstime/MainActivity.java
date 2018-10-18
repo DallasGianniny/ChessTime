@@ -5,7 +5,6 @@ import android.support.v4.view.accessibility.AccessibilityNodeInfoCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -53,6 +52,21 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
+        class PlayerTurn{
+            private boolean turn;
+
+            public PlayerTurn() {
+            }
+
+            public boolean isTurn() {
+                return turn;
+            }
+
+            public void setTurn(boolean turn) {
+                this.turn = turn;
+            }
+        }
+
         final long fiveMinutes = 300000;
 
         Button startButton = findViewById(R.id.firstTurnbutton);
@@ -63,6 +77,8 @@ public class MainActivity extends AppCompatActivity {
         final TextView textView2 = findViewById(R.id.textView2);
         final BetterCountDownTimer betterCountDownTimer = new BetterCountDownTimer(textView);
         final BetterCountDownTimer betterCountDownTimer2 = new BetterCountDownTimer(textView2);
+        final PlayerTurn player1Turn = new PlayerTurn();
+        final PlayerTurn player2Turn = new PlayerTurn();
 
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
                     betterCountDownTimer.createCountDownTimer(fiveMinutes);
                     betterCountDownTimer2.createCountDownTimer(fiveMinutes);
                     betterCountDownTimer.countDownTimer.start();
+                    player1Turn.setTurn(true);
                 }
             }
         });
@@ -81,6 +98,7 @@ public class MainActivity extends AppCompatActivity {
                     betterCountDownTimer2.createCountDownTimer(fiveMinutes);
                     betterCountDownTimer.createCountDownTimer(fiveMinutes);
                     betterCountDownTimer2.countDownTimer.start();
+                    player2Turn.setTurn(true);
                 }
             }
         });
@@ -89,10 +107,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (!checkIfEmptyText(textView) || !checkIfEmptyText(textView2)) {
+                    if (player1Turn.isTurn()) {
                     long millisUntilFinished = betterCountDownTimer.getMillisUntilFinished();
                     betterCountDownTimer.countDownTimer.cancel();
                     betterCountDownTimer.createCountDownTimer(millisUntilFinished);
-                    betterCountDownTimer2.countDownTimer.start();
+
+                        betterCountDownTimer2.countDownTimer.start();
+                    }
+                    player1Turn.setTurn(false);
+                    player2Turn.setTurn(true);
                 }
             }
         });
@@ -100,10 +123,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (!checkIfEmptyText(textView) || !checkIfEmptyText(textView2)) {
+                    if (player2Turn.isTurn()) {
                     long millisUntilFinished = betterCountDownTimer2.getMillisUntilFinished();
                     betterCountDownTimer2.countDownTimer.cancel();
                     betterCountDownTimer2.createCountDownTimer(millisUntilFinished);
-                    betterCountDownTimer.countDownTimer.start();
+
+                        betterCountDownTimer.countDownTimer.start();
+                    }
+                    player2Turn.setTurn(false);
+                    player1Turn.setTurn(true);
                 }
             }
         });
