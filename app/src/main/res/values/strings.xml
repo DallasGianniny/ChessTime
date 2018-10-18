@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">ChessTime</string>
+    <string name="first_turn">First Turn</string>
+    <string name="reset">Reset</string>
 </resources>
