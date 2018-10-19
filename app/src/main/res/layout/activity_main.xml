@@ -15,7 +15,7 @@
         android:layout_height="180dp"
         android:layout_marginTop="8dp"
         android:background="@color/Gray"
-        android:hint="Player 1"
+        android:hint="@string/player_1"
         android:textColor="@android:color/black"
         android:textSize="88sp"
         android:typeface="serif"
@@ -31,7 +31,7 @@
         android:layout_height="180dp"
         android:layout_marginBottom="8dp"
         android:background="@color/Gray"
-        android:hint="Player 2"
+        android:hint="@string/player_2"
         android:rotation="180"
         android:textColor="@android:color/black"
         android:textSize="88sp"
@@ -78,7 +78,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="24dp"
         android:background="@color/Gray"
-        android:hint="PRESS FOR FIRST TURN"
+        android:hint="@string/press_for_first_turn"
         android:textColor="@android:color/black"
         android:textColorHighlight="@color/White"
         android:textSize="24sp"
@@ -100,7 +100,7 @@
         android:layout_marginBottom="8dp"
         android:background="@color/Gray"
         android:elevation="60sp"
-        android:hint="PRESS FOR FIRST TURN"
+        android:hint="@string/press_for_first_turn"
         android:rotation="180"
         android:textColor="@android:color/black"
         android:textColorHighlight="@color/White"
@@ -125,8 +125,7 @@
         app:layout_constraintBottom_toTopOf="@+id/firstTurnbutton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/firstTurnButton2"
-        tools:text="RST" />
+        app:layout_constraintTop_toBottomOf="@+id/firstTurnButton2" />
 
     <!--<TextView-->
         <!--android:id="@+id/textView"-->
@@ -158,13 +157,14 @@
         <!--app:layout_constraintVertical_bias="1.0" />-->
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/resetLeft"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:rotation="90"
         android:text="@string/reset"
+        android:textAlignment="center"
         android:typeface="monospace"
         app:layout_constraintBottom_toTopOf="@+id/firstTurnbutton"
         app:layout_constraintEnd_toStartOf="@+id/resetButton"
@@ -173,13 +173,14 @@
         app:layout_constraintTop_toBottomOf="@+id/firstTurnButton2" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/resetRight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:rotation="270"
         android:text="@string/reset"
+        android:textAlignment="center"
         android:typeface="monospace"
         app:layout_constraintBottom_toTopOf="@+id/firstTurnbutton"
         app:layout_constraintEnd_toEndOf="parent"
