@@ -56,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             public void createCountDownTimer(long millisInFuture) {
+                setMillisUntilFinished(millisInFuture);
                 CountDownTimer countDownTimer = new CountDownTimer(millisInFuture, 1000) {
                     @Override
                     public void onTick(long millisUntilFinished) {
@@ -99,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        final long fiveMinutes = 300000;
+        final long fiveMinutes = 300000;    //TODO make this a number set by user in another activity
 
         Button startButton = findViewById(R.id.firstTurnbutton);
         Button startButton2 = findViewById(R.id.firstTurnButton2);
@@ -127,20 +128,22 @@ public class MainActivity extends AppCompatActivity {
         resetButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!playerTurn.isPaused() && !playerTurn2.isPaused()) {
-                    long millisUntilFinished = betterCountDownTimer.getMillisUntilFinished();
-                    long millisUntilFinished2 = betterCountDownTimer2.getMillisUntilFinished();
-                    betterCountDownTimer.countDownTimer.cancel();
-                    betterCountDownTimer2.countDownTimer.cancel();
-                    betterCountDownTimer.createCountDownTimer(millisUntilFinished);
-                    betterCountDownTimer2.createCountDownTimer(millisUntilFinished2);
-                    playerTurn.setPaused(true);
-                    playerTurn2.setPaused(true);
-                } else {
-                    if (playerTurn.isTurn()) betterCountDownTimer.countDownTimer.start();
-                    if (playerTurn2.isTurn()) betterCountDownTimer2.countDownTimer.start();
-                    playerTurn.setPaused(false);
-                    playerTurn2.setPaused(false);
+                if (!checkIfEmptyButtonText(turnButton) || !checkIfEmptyButtonText(turnButton2)) {
+                    if (!playerTurn.isPaused() && !playerTurn2.isPaused()) {
+                        long millisUntilFinished = betterCountDownTimer.getMillisUntilFinished();
+                        long millisUntilFinished2 = betterCountDownTimer2.getMillisUntilFinished();
+                        betterCountDownTimer.countDownTimer.cancel();
+                        betterCountDownTimer2.countDownTimer.cancel();
+                        betterCountDownTimer.createCountDownTimer(millisUntilFinished);
+                        betterCountDownTimer2.createCountDownTimer(millisUntilFinished2);
+                        playerTurn.setPaused(true);
+                        playerTurn2.setPaused(true);
+                    } else {
+                        if (playerTurn.isTurn()) betterCountDownTimer.countDownTimer.start();
+                        if (playerTurn2.isTurn()) betterCountDownTimer2.countDownTimer.start();
+                        playerTurn.setPaused(false);
+                        playerTurn2.setPaused(false);
+                    }
                 }
             }
         });
@@ -232,4 +235,3 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 }
-
