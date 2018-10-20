@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/Gray"
+    android:background="@color/Black"
     tools:context=".MainActivity">
 
     <Button
@@ -16,6 +16,7 @@
         android:background="@color/Gray"
         android:hint="@string/player_1"
         android:textColor="@android:color/black"
+        android:textColorHint="@color/colorPrimary"
         android:textSize="88sp"
         android:typeface="serif"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -33,6 +34,7 @@
         android:hint="@string/player_2"
         android:rotation="180"
         android:textColor="@android:color/black"
+        android:textColorHint="@color/colorPrimary"
         android:textSize="88sp"
         android:typeface="serif"
         app:layout_constraintBottom_toBottomOf="@+id/button"
@@ -53,6 +55,7 @@
         android:hint="@string/press_for_first_turn"
         android:textColor="@android:color/black"
         android:textColorHighlight="@color/White"
+        android:textColorHint="@color/colorPrimary"
         android:textSize="24sp"
         android:typeface="monospace"
         app:layout_constraintBottom_toTopOf="@+id/button"
@@ -76,6 +79,7 @@
         android:rotation="180"
         android:textColor="@android:color/black"
         android:textColorHighlight="@color/White"
+        android:textColorHint="@color/colorPrimary"
         android:textSize="24sp"
         android:typeface="monospace"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -108,6 +112,7 @@
         android:rotation="90"
         android:text="@string/reset"
         android:textAlignment="center"
+        android:textColor="@color/colorPrimary"
         android:typeface="monospace"
         app:layout_constraintBottom_toTopOf="@+id/firstTurnbutton"
         app:layout_constraintEnd_toStartOf="@+id/resetButton"
@@ -116,20 +121,20 @@
         app:layout_constraintTop_toBottomOf="@+id/firstTurnButton2" />
 
     <!--<TextView-->
-        <!--android:id="@+id/resetRight"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginTop="8dp"-->
-        <!--android:layout_marginBottom="8dp"-->
-        <!--android:rotation="270"-->
-        <!--android:text="@string/reset"-->
-        <!--android:textAlignment="center"-->
-        <!--android:typeface="monospace"-->
-        <!--app:layout_constraintBottom_toTopOf="@+id/firstTurnbutton"-->
-        <!--app:layout_constraintEnd_toEndOf="parent"-->
-        <!--app:layout_constraintHorizontal_bias="0.0"-->
-        <!--app:layout_constraintStart_toEndOf="@+id/resetButton"-->
-        <!--app:layout_constraintTop_toBottomOf="@+id/firstTurnButton2" />-->
+    <!--android:id="@+id/resetRight"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginTop="8dp"-->
+    <!--android:layout_marginBottom="8dp"-->
+    <!--android:rotation="270"-->
+    <!--android:text="@string/reset"-->
+    <!--android:textAlignment="center"-->
+    <!--android:typeface="monospace"-->
+    <!--app:layout_constraintBottom_toTopOf="@+id/firstTurnbutton"-->
+    <!--app:layout_constraintEnd_toEndOf="parent"-->
+    <!--app:layout_constraintHorizontal_bias="0.0"-->
+    <!--app:layout_constraintStart_toEndOf="@+id/resetButton"-->
+    <!--app:layout_constraintTop_toBottomOf="@+id/firstTurnButton2" />-->
 
     <TextView
         android:id="@+id/resetRight"
@@ -140,6 +145,7 @@
         android:rotation="270"
         android:text="@string/pause"
         android:textAlignment="center"
+        android:textColor="@color/colorPrimary"
         android:typeface="monospace"
         app:layout_constraintBottom_toTopOf="@+id/firstTurnbutton"
         app:layout_constraintEnd_toEndOf="parent"
