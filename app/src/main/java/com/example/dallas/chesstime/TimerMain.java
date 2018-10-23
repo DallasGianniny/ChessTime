@@ -7,8 +7,8 @@
  * and a long press restarts the timer by reloading the main activity.
  *
  * @author Dallas Gianniny
- * @version 0.1.0
- * @date October 19 2018
+ * @version 0.2.0
+ * @date October 22 2018
  */
 package com.example.dallas.chesstime;
 
@@ -21,12 +21,18 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity {
+public class TimerMain extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_timer_main);
+
+        /**
+         * Attempting to get extra information from StartMenu activity
+         */
+        Intent intent = getIntent();
+        int num = intent.getIntExtra(StartMenu.EXTRA_NUM, 0);
 
         /**
          * Hides App title bar.
@@ -122,7 +128,10 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        final long fiveMinutes = 300000;    //TODO make this a number set by user in another activity
+        /**
+         * Assigns amount of time for each player
+         */
+        final long userSetTime = 600000; //TODO fix this
 
         /**
          * Assigns button UI elements by id.
@@ -196,8 +205,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (checkIfEmptyButtonText(turnButton) && checkIfEmptyButtonText(turnButton2)) {
-                    betterCountDownTimer.createCountDownTimer(fiveMinutes);
-                    betterCountDownTimer2.createCountDownTimer(fiveMinutes);
+                    betterCountDownTimer.createCountDownTimer(userSetTime);
+                    betterCountDownTimer2.createCountDownTimer(userSetTime);
                     betterCountDownTimer.countDownTimer.start();
                     playerTurn.setTurn(true);
                 }
@@ -207,8 +216,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (checkIfEmptyButtonText(turnButton) && checkIfEmptyButtonText(turnButton2)) {
-                    betterCountDownTimer2.createCountDownTimer(fiveMinutes);
-                    betterCountDownTimer.createCountDownTimer(fiveMinutes);
+                    betterCountDownTimer2.createCountDownTimer(userSetTime);
+                    betterCountDownTimer.createCountDownTimer(userSetTime);
                     betterCountDownTimer2.countDownTimer.start();
                     playerTurn2.setTurn(true);
                 }
