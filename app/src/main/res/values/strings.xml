@@ -9,19 +9,7 @@
     <string name="seconds">Seconds</string>
     <string name="minutes">Minutes</string>
     <string name="each">Each</string>
-
-    <string-array name="labels_array">
-        <item>1 Minute</item>
-        <item>2 Minutes</item>
-        <item>3 Minutes</item>
-        <item>4 Minutes</item>
-        <item>5 Minutes</item>
-        <item>10 Minutes</item>
-        <item>15 Minutes</item>
-        <item>20 Minutes</item>
-        <item>30 Minutes</item>
-        <item>60 Minutes</item>
-    </string-array>
+    <string name="mins">Mins.</string>
 
     <string-array name="numeric_labels_array">
         <item>1</item>
@@ -33,20 +21,6 @@
         <item>15</item>
         <item>20</item>
         <item>30</item>
-        <!--<item>60</item>-->
+        <item>60</item>
     </string-array>
-
-    <string-array name="numeric2_labels_array">
-        <item>1:00</item>
-        <item>2:00</item>
-        <item>3:00</item>
-        <item>4:00</item>
-        <item>5:00</item>
-        <item>10:00</item>
-        <item>15:00</item>
-        <item>20:00</item>
-        <item>30:00</item>
-        <item>60:00</item>
-    </string-array>
-
 </resources>

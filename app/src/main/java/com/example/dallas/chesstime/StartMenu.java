@@ -7,8 +7,8 @@
  * and a long press restarts the timer by reloading the main activity.
  *
  * @author Dallas Gianniny
- * @version 0.3.0
- * @date October 23 2018
+ * @version 0.9.0
+ * @date October 24 2018
  */
 package com.example.dallas.chesstime;
 
@@ -69,10 +69,10 @@ public class StartMenu extends AppCompatActivity implements AdapterView.OnItemSe
 
         final Spinner spinner = findViewById(R.id.minutesSelectSpinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.numeric_labels_array, android.R.layout.simple_spinner_item);
+                R.array.numeric_labels_array, R.layout.simple_spinner_dropdown_item);
 
         spinner.setOnItemSelectedListener(this);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
         Button button = findViewById(R.id.setTimeButton);
