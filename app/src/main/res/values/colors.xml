@@ -12,4 +12,6 @@
     <color name="White">#FFFFFF</color>
     <color name="Gray">#96555555</color>
     <color name="Black">#000000</color>
+    <color name="SolidGray">#555555</color>
+    <color name="TransparentWhite">#C8FFFFFF</color>
 </resources>

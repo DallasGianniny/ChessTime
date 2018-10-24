@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/Black"
+    tools:context=".StartMenu">
+
+    <View
+        android:id="@+id/gray_Top"
+        android:layout_width="match_parent"
+        android:layout_height="47dp"
+        android:layout_alignParentTop="true"
+        android:background="@color/colorPrimary"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.100000024"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <View
+        android:id="@+id/red_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentTop="true"
+        android:background="@color/One"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/setTimeButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gray_Top"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <View
+        android:id="@+id/green_top"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="32dp"
+        android:background="@color/Five"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/lightgreen_top"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gray_Top"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <View
+        android:id="@+id/lightgreen_top"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="32dp"
+        android:background="@color/Four"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/lightorange_middle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gray_Top"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <View
+        android:id="@+id/orange_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="32dp"
+        android:background="@color/Two"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/red_bottom"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gray_Top"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <View
+        android:id="@+id/darkred_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentTop="true"
+        android:background="@color/OneHalf"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/setTimeButton" />
+
+    <View
+        android:id="@+id/lightorange_middle"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="32dp"
+        android:background="@color/Three"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/orange_bottom"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gray_Top"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <View
+        android:id="@+id/black_vert_topleft"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_alignParentTop="true"
+        android:background="@color/Black"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/lightorange_middle"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/green_top" />
+
+    <View
+        android:id="@+id/black_vert_bottomleft"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="8dp"
+        android:background="@color/Black"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/red_bottom"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lightorange_middle" />
+
+    <View
+        android:id="@+id/black_vert_bottomright"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="8dp"
+        android:background="@color/Black"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/red_bottom"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toBottomOf="@+id/lightorange_middle" />
+
+    <View
+        android:id="@+id/black_bottom_middle"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_alignParentTop="true"
+        android:background="@color/Black"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/red_bottom"
+        app:layout_constraintEnd_toStartOf="@+id/guideline4"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toTopOf="@+id/red_bottom" />
+
+    <View
+        android:id="@+id/black_top_middle"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_alignParentTop="true"
+        android:background="@color/Black"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/green_top"
+        app:layout_constraintEnd_toStartOf="@+id/guideline4"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toTopOf="@+id/green_top" />
+
+    <View
+        android:id="@+id/black_vert_topright"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_alignParentTop="true"
+        android:background="@color/Black"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/lightorange_middle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toBottomOf="@+id/green_top" />
+
+    <View
+        android:id="@+id/black_vert_midright"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_alignParentTop="true"
+        android:background="@color/Black"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/orange_bottom"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="@+id/guideline4"
+        app:layout_constraintTop_toBottomOf="@+id/lightgreen_top" />
+
+    <View
+        android:id="@+id/black_vert_midleft"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_alignParentTop="true"
+        android:background="@color/Black"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/orange_bottom"
+        app:layout_constraintEnd_toStartOf="@+id/guideline3"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/lightgreen_top" />
+
+    <View
+        android:id="@+id/gray_bottom_darkred"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_alignParentTop="true"
+        android:background="@color/colorPrimary"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/darkred_bottom"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <Button
+        android:id="@+id/setTimeButton"
+        style="@android:style/Widget.Holo.Button.Borderless"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/Gray"
+        android:hint="@string/press_to_open_timer"
+        android:textColor="@android:color/black"
+        android:textColorHint="@color/colorPrimary"
+        android:typeface="monospace"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.9" />
+
+    <Spinner
+        android:id="@+id/minutesSelectSpinner"
+        android:layout_width="wrap_content"
+        android:layout_height="44dp"
+        android:layout_marginEnd="3dp"
+        android:dropDownWidth="47dp"
+        android:fadingEdge="vertical"
+        android:spinnerMode="dialog"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/setTimeButton"
+        app:layout_constraintEnd_toStartOf="@+id/startMenuTimerUnits"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.124"></Spinner>
+
+    <TextView
+        android:id="@+id/startMenuAppTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"
+        android:textAppearance="@android:style/TextAppearance.Holo.Widget.ActionBar.Title"
+        android:textColor="@color/colorPrimary"
+        android:textSize="44sp"
+        android:textStyle="bold"
+        android:typeface="serif"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/startMenuTimerUnits"
+        android:layout_width="47dp"
+        android:layout_height="23.5dp"
+        android:layout_marginBottom="16dp"
+        android:text="@string/mins"
+        android:textColor="@color/Black"
+        android:textSize="18sp"
+        android:typeface="serif"
+        app:layout_constraintBottom_toTopOf="@+id/setTimeButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/centerGuide"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.117" />
+
+    <TextView
+        android:id="@+id/startMenuTimerUnits2"
+        android:layout_width="47dp"
+        android:layout_height="23.5dp"
+        android:text="@string/each"
+        android:textColor="@color/Black"
+        android:textSize="18sp"
+        android:typeface="serif"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/centerGuide"
+        app:layout_constraintTop_toBottomOf="@+id/startMenuTimerUnits" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/centerGuide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="180dp" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="300dp" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="300dp" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="128dp" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="229dp" />
+
+</android.support.constraint.ConstraintLayout>

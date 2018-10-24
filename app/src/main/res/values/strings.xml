@@ -5,4 +5,22 @@
     <string name="press_for_first_turn">PRESS FOR FIRST TURN</string>
     <string name="player_1">Player 1</string>
     <string name="player_2">Player 2</string>
+    <string name="press_to_open_timer">PRESS TO CREATE TIMER</string>
+    <string name="seconds">Seconds</string>
+    <string name="minutes">Minutes</string>
+    <string name="each">Each</string>
+    <string name="mins">Mins.</string>
+
+    <string-array name="numeric_labels_array">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>10</item>
+        <item>15</item>
+        <item>20</item>
+        <item>30</item>
+        <item>60</item>
+    </string-array>
 </resources>
