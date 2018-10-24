@@ -4,38 +4,108 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/Gray"
     tools:context=".StartMenu">
 
     <Button
         android:id="@+id/setTimeButton"
+        style="@android:style/Widget.Holo.Button.Borderless"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:hint="Press to Open Timer"
+        android:background="@color/Gray"
+        android:hint="@string/press_to_open_timer"
+        android:textColor="@android:color/black"
+        android:textColorHint="@color/colorPrimary"
+        android:typeface="monospace"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.902" />
 
     <Spinner
-        android:id="@+id/label_spinner"
-        style="@style/Widget.AppCompat.Spinner.Underlined"
+        android:id="@+id/minutesSelectSpinner"
+        style="@android:style/Widget.Material.Light.Spinner.Underlined"
         android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:layout_marginStart="156dp"
-        android:layout_marginEnd="156dp"
-        android:layout_marginBottom="8dp"
-        android:dropDownWidth="wrap_content"
-        android:spinnerMode="dialog"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/Gray"
+        android:dropDownWidth="50dp"
+        android:fadingEdge="vertical"
+        android:overScrollMode="never"
+        android:spinnerMode="dropdown"
         android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/setTimeButton"
+        app:layout_constraintEnd_toStartOf="@+id/startMenuTimerUnits"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.28">
+
+    </Spinner>
+
+    <TextView
+        android:id="@+id/startMenuAppTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"
+        android:textAppearance="@android:style/TextAppearance.Holo.Widget.ActionBar.Title"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        android:typeface="serif"
+        app:layout_constraintBottom_toTopOf="@+id/minutesSelectSpinner"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"></Spinner>
+        app:layout_constraintVertical_bias="0.31" />
+
+    <TextView
+        android:id="@+id/startMenuTimerUnits"
+        android:layout_width="wrap_content"
+        android:layout_height="28sp"
+        android:text="@string/minutes"
+        android:textSize="18sp"
+        android:typeface="serif"
+        app:layout_constraintBottom_toTopOf="@+id/setTimeButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/centerGuide"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.28" />
+
+    <TextView
+        android:id="@+id/startMenuTimerUnits2"
+        android:layout_width="wrap_content"
+        android:layout_height="28sp"
+        android:layout_marginEnd="92dp"
+        android:text="@string/each"
+        android:textSize="18sp"
+        android:typeface="serif"
+        app:layout_constraintBottom_toTopOf="@+id/setTimeButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/centerGuide"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.32999998" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/centerGuide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="180dp" />
+
+    <!--<EditText-->
+    <!--android:id="@+id/setTimeText"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:ems="10"-->
+    <!--android:hint="Minutes"-->
+    <!--android:inputType="number"-->
+    <!--android:textAlignment="center"-->
+    <!--app:layout_constraintBottom_toTopOf="@+id/setTimeButton"-->
+    <!--app:layout_constraintEnd_toEndOf="parent"-->
+    <!--app:layout_constraintStart_toStartOf="parent"-->
+    <!--app:layout_constraintTop_toBottomOf="@+id/label_spinner" />-->
 
 </android.support.constraint.ConstraintLayout>

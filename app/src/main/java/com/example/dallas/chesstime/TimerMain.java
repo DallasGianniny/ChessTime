@@ -7,21 +7,110 @@
  * and a long press restarts the timer by reloading the main activity.
  *
  * @author Dallas Gianniny
- * @version 0.2.0
- * @date October 22 2018
+ * @version 0.3.0
+ * @date October 23 2018
  */
 package com.example.dallas.chesstime;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v4.view.accessibility.AccessibilityNodeInfoCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 
 public class TimerMain extends AppCompatActivity {
+
+    /**
+     * Used for creating and displaying timers.
+     * <p>
+     * BetterCountDownTimer uses built in CountDownTimer
+     * in conjunction with UI elements to display a timer (secs).
+     */
+    class BetterCountDownTimer {
+        private Button button;
+        private long millisUntilFinished;
+        private CountDownTimer countDownTimer;
+
+        public BetterCountDownTimer() {
+        }
+
+        public Button getButton() {
+            return button;
+        }
+
+        public void setButton(Button button) {
+            this.button = button;
+        }
+
+        public void setMillisUntilFinished(long millisUntilFinished) {
+            this.millisUntilFinished = millisUntilFinished;
+        }
+
+        public long getMillisUntilFinished() {
+            return millisUntilFinished;
+        }
+
+        /**
+         * Creates a new CountDownTimer using param millisInFuture.
+         * <p>
+         * Sets this.button text to seconds remaining.
+         * Saves time remaining to private attribute millisUntilFinished.
+         * Changes turnButton color based on time remaining.
+         *
+         * @param millisInFuture Starting time for countDownTimer, effectively setting timer.
+         */
+        public void createCountDownTimer(long millisInFuture) {
+            setMillisUntilFinished(millisInFuture);
+            CountDownTimer countDownTimer = new CountDownTimer(millisInFuture, 1000) {
+                @Override
+                public void onTick(long millisUntilFinished) {
+                    long minutes = millisUntilFinished / 60000;
+                    long seconds = (millisUntilFinished / 1000) - (minutes * 60);
+                    if (seconds < 10) {
+                        button.setText(minutes + ":0" + seconds);
+                    } else button.setText(minutes + ":" + seconds);
+                    setMillisUntilFinished(millisUntilFinished);
+                    changeButtonColor(button, millisUntilFinished);
+                    //changeButtonColor2(button, millisUntilFinished, userSetTime);
+                }
+
+                @Override
+                public void onFinish() {
+                    button.setBackgroundColor(getResources().getColor(R.color.Gray));
+                    button.setText("0:00");
+                }
+            };
+            this.countDownTimer = countDownTimer;
+        }
+    }
+
+    class PlayerTurn {
+        private boolean turn;
+        private boolean paused;
+
+        public PlayerTurn() {
+            this.paused = false;
+        }
+
+        public boolean isTurn() {
+            return turn;
+        }
+
+        public void setTurn(boolean turn) {
+            this.turn = turn;
+        }
+
+        public boolean isPaused() {
+            return paused;
+        }
+
+        public void setPaused(boolean paused) {
+            this.paused = paused;
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,105 +122,19 @@ public class TimerMain extends AppCompatActivity {
          */
         Intent intent = getIntent();
         int num = intent.getIntExtra(StartMenu.EXTRA_NUM, 0);
-
-        /**
-         * Hides App title bar.
-         */
-        getWindow().setFlags(AccessibilityNodeInfoCompat.ACTION_NEXT_HTML_ELEMENT, AccessibilityNodeInfoCompat.ACTION_NEXT_HTML_ELEMENT);
-        getWindow().getDecorView().setSystemUiVisibility(3328);
-        /**
-         * Forces screen to stay on.
-         */
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-
-        /**
-         * Used for creating and displaying timers.
-         * <p>
-         * BetterCountDownTimer uses built in CountDownTimer
-         * in conjunction with UI elements to display a timer (secs).
-         */
-        class BetterCountDownTimer {
-            private Button button;
-            private long millisUntilFinished;
-            private CountDownTimer countDownTimer;
-
-            public BetterCountDownTimer() {
-            }
-
-            public Button getButton() {
-                return button;
-            }
-
-            public void setButton(Button button) {
-                this.button = button;
-            }
-
-            public void setMillisUntilFinished(long millisUntilFinished) {
-                this.millisUntilFinished = millisUntilFinished;
-            }
-
-            public long getMillisUntilFinished() {
-                return millisUntilFinished;
-            }
-
-            /**
-             * Creates a new CountDownTimer using param millisInFuture.
-             * <p>
-             * Sets this.button text to seconds remaining.
-             * Saves time remaining to private attribute millisUntilFinished.
-             * Changes turnButton color based on time remaining.
-             *
-             * @param millisInFuture Starting time for countDownTimer, effectively setting timer.
-             */
-            public void createCountDownTimer(long millisInFuture) {
-                setMillisUntilFinished(millisInFuture);
-                CountDownTimer countDownTimer = new CountDownTimer(millisInFuture, 1000) {
-                    @Override
-                    public void onTick(long millisUntilFinished) {
-                        button.setText("" + millisUntilFinished / 1000);
-                        setMillisUntilFinished(millisUntilFinished);
-                        changeButtonColor(button, millisUntilFinished);
-                    }
-
-                    @Override
-                    public void onFinish() {
-                        button.setBackgroundColor(getResources().getColor(R.color.Gray));
-                        button.setText("0");
-                    }
-                };
-                this.countDownTimer = countDownTimer;
-            }
-        }
-
-        class PlayerTurn {
-            private boolean turn;
-            private boolean paused;
-
-            public PlayerTurn() {
-                this.paused = false;
-            }
-
-            public boolean isTurn() {
-                return turn;
-            }
-
-            public void setTurn(boolean turn) {
-                this.turn = turn;
-            }
-
-            public boolean isPaused() {
-                return paused;
-            }
-
-            public void setPaused(boolean paused) {
-                this.paused = paused;
-            }
-        }
-
         /**
          * Assigns amount of time for each player
          */
-        final long userSetTime = 600000; //TODO fix this
+        final long userSetTime = minutesToMilliseconds(num);
+
+        /**
+         * Hides app title bar.
+         * <b>
+         * Forces screen on
+         */
+        getWindow().setFlags(AccessibilityNodeInfoCompat.ACTION_NEXT_HTML_ELEMENT, AccessibilityNodeInfoCompat.ACTION_NEXT_HTML_ELEMENT);
+        getWindow().getDecorView().setSystemUiVisibility(3328);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         /**
          * Assigns button UI elements by id.
@@ -205,6 +208,8 @@ public class TimerMain extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (checkIfEmptyButtonText(turnButton) && checkIfEmptyButtonText(turnButton2)) {
+                    changeButtonColor(betterCountDownTimer.button, betterCountDownTimer.getMillisUntilFinished());
+                    //changeButtonColor2(betterCountDownTimer.getButton(), betterCountDownTimer.getMillisUntilFinished(), userSetTime);
                     betterCountDownTimer.createCountDownTimer(userSetTime);
                     betterCountDownTimer2.createCountDownTimer(userSetTime);
                     betterCountDownTimer.countDownTimer.start();
@@ -216,6 +221,8 @@ public class TimerMain extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (checkIfEmptyButtonText(turnButton) && checkIfEmptyButtonText(turnButton2)) {
+                    changeButtonColor(betterCountDownTimer2.button, betterCountDownTimer2.getMillisUntilFinished());
+                    //changeButtonColor2(betterCountDownTimer2.getButton(), betterCountDownTimer2.getMillisUntilFinished(), userSetTime);
                     betterCountDownTimer2.createCountDownTimer(userSetTime);
                     betterCountDownTimer.createCountDownTimer(userSetTime);
                     betterCountDownTimer2.countDownTimer.start();
@@ -312,9 +319,41 @@ public class TimerMain extends AppCompatActivity {
         if ((millisUntilFinished < 59999) && (millisUntilFinished > 30000))
             button.setBackgroundColor(getResources().getColor(R.color.One));
         if (millisUntilFinished < 29999) {
+            if ((((int) millisUntilFinished / 1000) % 2) != 0) {
+                button.setBackgroundColor(getResources().getColor(R.color.OneHalf));
+            } else button.setBackgroundColor(getResources().getColor(R.color.Gray));
+        }
+    }
+
+    /**
+     * Attempting to make color change adaptable
+     */
+    public void changeButtonColor2(Button button, long millisUntilFinished, long userSetTime) {
+        if (((float) (millisUntilFinished / userSetTime) > 0.8))
+            button.setBackgroundColor(getResources().getColor(R.color.Five));
+        if (((float) (millisUntilFinished / userSetTime) < 0.8) && ((float) (millisUntilFinished / userSetTime) > 0.6))
+            button.setBackgroundColor(getResources().getColor(R.color.Four));
+        if (((float) (millisUntilFinished / userSetTime) < 0.6) && ((float) (millisUntilFinished / userSetTime) > 0.4))
+            button.setBackgroundColor(getResources().getColor(R.color.Three));
+        if (((float) (millisUntilFinished / userSetTime) < 0.4) && ((float) (millisUntilFinished / userSetTime) > 0.2))
+            button.setBackgroundColor(getResources().getColor(R.color.Two));
+        if (((float) (millisUntilFinished / userSetTime) < 0.2) && ((float) (millisUntilFinished / userSetTime) > 0.1))
+            button.setBackgroundColor(getResources().getColor(R.color.One));
+        if (((float) (millisUntilFinished / userSetTime) < 0.1)) {
             if ((((int) millisUntilFinished / 1000) % 2) == 0) {
                 button.setBackgroundColor(getResources().getColor(R.color.OneHalf));
             } else button.setBackgroundColor(getResources().getColor(R.color.Gray));
         }
+    }
+
+    /**
+     * Converts minutes to milliseconds.
+     *
+     * @param num integer value of minutes.
+     * @return long value conversion of minutes into milliseconds.
+     */
+    public long minutesToMilliseconds(int num) {
+        num *= 60000;
+        return num;
     }
 }

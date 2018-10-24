@@ -7,8 +7,8 @@
  * and a long press restarts the timer by reloading the main activity.
  *
  * @author Dallas Gianniny
- * @version 0.2.0
- * @date October 22 2018
+ * @version 0.3.0
+ * @date October 23 2018
  */
 package com.example.dallas.chesstime;
 
@@ -67,7 +67,7 @@ public class StartMenu extends AppCompatActivity implements AdapterView.OnItemSe
         getWindow().setFlags(AccessibilityNodeInfoCompat.ACTION_NEXT_HTML_ELEMENT, AccessibilityNodeInfoCompat.ACTION_NEXT_HTML_ELEMENT);
         getWindow().getDecorView().setSystemUiVisibility(3328);
 
-        final Spinner spinner = findViewById(R.id.label_spinner);
+        final Spinner spinner = findViewById(R.id.minutesSelectSpinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.numeric_labels_array, android.R.layout.simple_spinner_item);
 
