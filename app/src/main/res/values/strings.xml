@@ -2,14 +2,10 @@
     <string name="app_name">ChessTime</string>
     <string name="reset">Reset</string>
     <string name="pause">Pause</string>
-    <string name="press_for_first_turn">PRESS FOR FIRST TURN</string>
+    <string name="press_for_first_turn">FIRST TURN</string>
     <string name="player_1">Player 1</string>
     <string name="player_2">Player 2</string>
-    <string name="press_to_open_timer">PRESS TO CREATE TIMER</string>
-    <string name="seconds">Seconds</string>
-    <string name="minutes">Minutes</string>
-    <string name="each">Each</string>
-    <string name="mins">Mins.</string>
+    <string name="press_to_open_timer">CREATE TIMER</string>
 
     <string-array name="numeric_labels_array">
         <item>1</item>

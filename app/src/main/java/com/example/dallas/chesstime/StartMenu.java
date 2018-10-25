@@ -21,6 +21,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 public class StartMenu extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -75,12 +76,14 @@ public class StartMenu extends AppCompatActivity implements AdapterView.OnItemSe
         adapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
-        Button button = findViewById(R.id.setTimeButton);
+
+
+        Button setTimeButton = findViewById(R.id.setTimeButton);
 
         /**
          * Sends extra data to TimerMain on press.
          */
-        button.setOnClickListener(new View.OnClickListener() {
+        setTimeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openTimerActivity();
@@ -103,10 +106,12 @@ public class StartMenu extends AppCompatActivity implements AdapterView.OnItemSe
      */
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        TextView selectedTimeText = findViewById(R.id.selectedTimeText);
         String string = parent.getItemAtPosition(position).toString();
         int number = Integer.parseInt(string);
         extraData.setNumber(number);
         extraData.setString(string);
+        selectedTimeText.setText(string + ":00");
     }
 
     @Override
