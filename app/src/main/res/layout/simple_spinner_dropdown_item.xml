@@ -17,6 +17,7 @@
 */
 -->
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@android:id/text2"
     style="?android:attr/spinnerDropDownItemStyle"
     android:layout_width="match_parent"
@@ -26,4 +27,5 @@
     android:singleLine="true"
     android:textAlignment="center"
     android:textColor="@color/Black"
-    android:textSize="20sp"/>
+    android:textSize="20sp"
+    tools:text="test" />
