@@ -7,8 +7,8 @@
  * and a long press restarts the timer by reloading the main activity.
  *
  * @author Dallas Gianniny
- * @version 0.9.0
- * @date October 24 2018
+ * @version 0.9.3
+ * @date October 25 2018
  */
 package com.example.dallas.chesstime;
 
