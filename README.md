@@ -1,6 +1,8 @@
+![Landscape View](https://i.imgur.com/YEtbVO1.png)
+
 # ChessTime
 
-Android app that acts as two player chess clock.
+Android app that emulates a two player chess clock.
 
 ## Description
 
@@ -20,7 +22,7 @@ Long press center timer button to reset.
 
 ### Installing
 
-* APKs can be found in ChessTime/app/release/
+* APKs can be found in [ChessTime/app/release/](https://github.com/DallasGianniny/ChessTime/tree/master/app/release)
 
 ### Executing program
 
