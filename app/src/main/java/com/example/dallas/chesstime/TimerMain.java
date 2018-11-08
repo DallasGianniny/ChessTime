@@ -1,17 +1,18 @@
-/**
- * This Android program can be used to replicate a physical two person chess timer.
- * <p>
- * One player presses a startButton, with the turnButtons being used thereafter.
- * <p>
- * The center resetButton can be short pressed to pause/resume the timers,
- * and a long press restarts the timer by reloading the main activity.
- *
- * @author Dallas Gianniny
- * @version 0.9.3
- * @date October 25 2018
- */
+///**
+// * This Android program can be used to replicate a physical two person chess timer.
+// *
+// * One player presses a startButton, with the turnButtons being used thereafter.
+// *
+// * The center resetButton can be short pressed to pause/resume the timers,
+// * and a long press restarts the timer by reloading the main activity.
+// *
+// * @author Dallas Gianniny
+// * @version 0.9.4
+// * @date November 7 2018
+// */
 package com.example.dallas.chesstime;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -21,36 +22,52 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 
+import java.util.ArrayList;
+
 public class TimerMain extends AppCompatActivity {
 
-    /**
-     * Used for creating and displaying timers.
-     * <p>
-     * BetterCountDownTimer uses built in CountDownTimer
-     * in conjunction with UI elements to display a timer (secs).
-     */
+//    /**
+//     * Used for creating and displaying timers.
+//     *
+//     * BetterCountDownTimer uses built in CountDownTimer
+//     * in conjunction with UI elements to display a timer (secs).
+//     */
     class BetterCountDownTimer {
-        private Button button;
         private long millisUntilFinished;
+        private long initialTime;
+        private long prevTime;
+        private Button button;
         private CountDownTimer countDownTimer;
 
-        public BetterCountDownTimer() {
+        BetterCountDownTimer() {
         }
 
-        public Button getButton() {
+        Button getButton() {
             return button;
         }
 
-        public void setButton(Button button) {
+        void setButton(Button button) {
             this.button = button;
         }
 
-        public void setMillisUntilFinished(long millisUntilFinished) {
+        void setMillisUntilFinished(long millisUntilFinished) {
             this.millisUntilFinished = millisUntilFinished;
         }
 
-        public long getMillisUntilFinished() {
+        long getMillisUntilFinished() {
             return millisUntilFinished;
+        }
+
+        void setInitialTime(long initialTime) {
+            this.initialTime = initialTime;
+        }
+
+        long getPrevTime() {
+            return prevTime;
+        }
+
+        void setPrevTime() {
+            this.prevTime = this.millisUntilFinished;
         }
 
         /**
@@ -58,32 +75,42 @@ public class TimerMain extends AppCompatActivity {
          * <p>
          * Sets this.button text to seconds remaining.
          * Saves time remaining to private attribute millisUntilFinished.
-         * Changes turnButton color based on time remaining.
+         * Changes turnButton color based on a ratio of time remaining.
+         * <p>
+         * On finish sets button background to icon background
+         * and sets text to empty string.
+         * <p>
+         * Uses an ArrayList to change turnIndicator green after 1 second.
          *
          * @param millisInFuture Starting time for countDownTimer, effectively setting timer.
          */
-        public void createCountDownTimer(long millisInFuture) {
+        void createCountDownTimer(long millisInFuture) {
             setMillisUntilFinished(millisInFuture);
-            CountDownTimer countDownTimer = new CountDownTimer(millisInFuture, 1000) {
+            final ArrayList<Boolean> oneTick = new ArrayList<>();
+            this.countDownTimer = new CountDownTimer(millisInFuture, 1000) {
+                @SuppressLint("SetTextI18n")
                 @Override
                 public void onTick(long millisUntilFinished) {
+                    setMillisUntilFinished(millisUntilFinished);
                     long minutes = millisUntilFinished / 60000;
                     long seconds = (millisUntilFinished / 1000) - (minutes * 60);
                     if (seconds < 10) {
                         button.setText(minutes + ":0" + seconds);
                     } else button.setText(minutes + ":" + seconds);
-                    setMillisUntilFinished(millisUntilFinished);
-                    changeButtonColor(button, millisUntilFinished);
-                    //changeButtonColor2(button, millisUntilFinished, userSetTime);
+                    changeButtonColor(button, millisUntilFinished, initialTime);
+                    oneTick.add(true);
+                    if (oneTick.size() > 1) {
+                        toggleGreenTurnIndicator(true);
+                        oneTick.clear();
+                    }
                 }
 
                 @Override
                 public void onFinish() {
-                    button.setBackgroundColor(getResources().getColor(R.color.Gray));
-                    button.setText("0:00");
+                    button.setBackgroundResource(R.drawable.chesstime);
+                    button.setText(" ");
                 }
             };
-            this.countDownTimer = countDownTimer;
         }
     }
 
@@ -91,23 +118,23 @@ public class TimerMain extends AppCompatActivity {
         private boolean turn;
         private boolean paused;
 
-        public PlayerTurn() {
+        PlayerTurn() {
             this.paused = false;
         }
 
-        public boolean isTurn() {
+        boolean isTurn() {
             return turn;
         }
 
-        public void setTurn(boolean turn) {
+        void setTurn(boolean turn) {
             this.turn = turn;
         }
 
-        public boolean isPaused() {
+        boolean isPaused() {
             return paused;
         }
 
-        public void setPaused(boolean paused) {
+        void setPaused(boolean paused) {
             this.paused = paused;
         }
     }
@@ -117,54 +144,60 @@ public class TimerMain extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timer_main);
 
-        /**
-         * Attempting to get extra information from StartMenu activity
-         */
+//        /**
+//         * Attempts to get extra information from StartMenu activity.
+//         */
         Intent intent = getIntent();
         int num = intent.getIntExtra(StartMenu.EXTRA_NUM, 0);
-        /**
-         * Assigns amount of time for each player
-         */
+//        /**
+//         * Assigns amount of time for each player.
+//         */
         final long userSetTime = minutesToMilliseconds(num);
 
-        /**
-         * Hides app title bar.
-         * <b>
-         * Forces screen on
-         */
+//        /**
+//         * Hides status bar.
+//         *
+//         * Forces screen on.
+//         */
         getWindow().setFlags(AccessibilityNodeInfoCompat.ACTION_NEXT_HTML_ELEMENT, AccessibilityNodeInfoCompat.ACTION_NEXT_HTML_ELEMENT);
         getWindow().getDecorView().setSystemUiVisibility(3328);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
-        /**
-         * Assigns button UI elements by id.
-         * <p>
-         * Names without the number 2 are associated with elements
-         * on the nearest the physical bottom of the phone.
-         */
-        Button startButton = findViewById(R.id.firstTurnbutton);
-        Button startButton2 = findViewById(R.id.firstTurnButton2);
+//        /**
+//         * Assigns button UI elements by id.
+//         *
+//         * Names without the number 2 are associated with elements
+//         * on the nearest the physical bottom of the phone.
+//         */
         final Button turnButton = findViewById(R.id.button);
         final Button turnButton2 = findViewById(R.id.button2);
         final Button resetButton = findViewById(R.id.resetButton);
 
-        /**
-         * Constructs instance of BetterCountDownTimer and PlayerTurn for each player.
-         */
+//        /**
+//         * Assigns linear layout UI elements by id.
+//         * Hides turn indicator before game begins.
+//         */
+        refreshTurnIndicatorVis(false, false);
+
+//        /**
+//         * Constructs instance of BetterCountDownTimer and PlayerTurn for each player.
+//         */
         final BetterCountDownTimer betterCountDownTimer = new BetterCountDownTimer();
         final BetterCountDownTimer betterCountDownTimer2 = new BetterCountDownTimer();
         final PlayerTurn playerTurn = new PlayerTurn();
         final PlayerTurn playerTurn2 = new PlayerTurn();
 
-        /**
-         * Assigns button UI elements to respective timers.
-         */
+//        /**
+//         * Assigns button UI elements and initial time to respective timers.
+//         */
         betterCountDownTimer.setButton(turnButton);
         betterCountDownTimer2.setButton(turnButton2);
+        betterCountDownTimer.setInitialTime(userSetTime);
+        betterCountDownTimer2.setInitialTime(userSetTime);
 
-        /**
-         * On resetButton long press, resets whole activity, effectively resetting timer
-         */
+//        /**
+//         * On resetButton long press, resets whole activity, effectively resetting timer.
+//         */
         resetButton.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -174,16 +207,16 @@ public class TimerMain extends AppCompatActivity {
                 return true;
             }
         });
-        /**
-         * On resetButton short press, pauses both timers.
-         * <p>
-         * Must be short pressed a second time to resume play.
-         */
+//        /**
+//         * On resetButton short press, pauses both timers.
+//         *
+//         * Must be short pressed a second time to resume play.
+//         */
         resetButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!checkIfEmptyButtonText(turnButton) || !checkIfEmptyButtonText(turnButton2)) {
-                    if (!playerTurn.isPaused() && !playerTurn2.isPaused()) {
+                if (!isButtonTextEmpty(turnButton) || !isButtonTextEmpty(turnButton2)) {
+                    if (!playerTurn.isPaused()) {
                         long millisUntilFinished = betterCountDownTimer.getMillisUntilFinished();
                         long millisUntilFinished2 = betterCountDownTimer2.getMillisUntilFinished();
                         betterCountDownTimer.countDownTimer.cancel();
@@ -191,69 +224,60 @@ public class TimerMain extends AppCompatActivity {
                         betterCountDownTimer.createCountDownTimer(millisUntilFinished);
                         betterCountDownTimer2.createCountDownTimer(millisUntilFinished2);
                         playerTurn.setPaused(true);
-                        playerTurn2.setPaused(true);
                     } else {
-                        if (playerTurn.isTurn()) betterCountDownTimer.countDownTimer.start();
-                        if (playerTurn2.isTurn()) betterCountDownTimer2.countDownTimer.start();
-                        playerTurn.setPaused(false);
-                        playerTurn2.setPaused(false);
+                        if (betterCountDownTimer.getMillisUntilFinished() > 1999 && betterCountDownTimer2.getMillisUntilFinished() > 1999) {
+                            if (playerTurn.isTurn()) betterCountDownTimer.countDownTimer.start();
+                            if (playerTurn2.isTurn()) betterCountDownTimer2.countDownTimer.start();
+                            playerTurn.setPaused(false);
+                        }
                     }
                 }
             }
         });
-        /**
-         * Initializes both timers at a predetermined value and starts one timer on press.
-         */
-        startButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (checkIfEmptyButtonText(turnButton) && checkIfEmptyButtonText(turnButton2)) {
-                    changeButtonColor(betterCountDownTimer.button, betterCountDownTimer.getMillisUntilFinished());
-                    //changeButtonColor2(betterCountDownTimer.getButton(), betterCountDownTimer.getMillisUntilFinished(), userSetTime);
-                    betterCountDownTimer.createCountDownTimer(userSetTime);
-                    betterCountDownTimer2.createCountDownTimer(userSetTime);
-                    betterCountDownTimer.countDownTimer.start();
-                    playerTurn.setTurn(true);
-                }
-            }
-        });
-        startButton2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (checkIfEmptyButtonText(turnButton) && checkIfEmptyButtonText(turnButton2)) {
-                    changeButtonColor(betterCountDownTimer2.button, betterCountDownTimer2.getMillisUntilFinished());
-                    //changeButtonColor2(betterCountDownTimer2.getButton(), betterCountDownTimer2.getMillisUntilFinished(), userSetTime);
-                    betterCountDownTimer2.createCountDownTimer(userSetTime);
-                    betterCountDownTimer.createCountDownTimer(userSetTime);
-                    betterCountDownTimer2.countDownTimer.start();
-                    playerTurn2.setTurn(true);
-                }
-            }
-        });
-        /**
-         * Main buttons used for starting and stopping timers
-         * once game is already in motion.
-         * <p>
-         * Checks if game is paused, if timer is greater than near zero,
-         * if button(timer) texts are not empty, and if it is the player's turn.
-         * <p>
-         * Modifies playerTurn.turn boolean flags.
-         */
+
+//        /**
+//         * Main buttons used for starting and stopping timers
+//         * both at start and once game is already in motion.
+//         *
+//         * Checks if button texts are empty (game not started)
+//         * and if true starts timer.
+//         *
+//         * Checks if game is paused, if timer is greater than near zero,
+//         * if button(timer) texts are not empty, and if it is the player's turn.
+//         *
+//         * Modifies playerTurn.turn boolean flags.
+//         *
+//         * Attempts to force at least 1 second to pass each turn
+//         */
         turnButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!playerTurn.isPaused()) {
-                    if (betterCountDownTimer.getMillisUntilFinished() > 1999) {
-                        if (!checkIfEmptyButtonText(turnButton) || !checkIfEmptyButtonText(turnButton2)) {
-                            if (playerTurn.isTurn()) {
-                                long millisUntilFinished = betterCountDownTimer.getMillisUntilFinished();
-                                betterCountDownTimer.countDownTimer.cancel();
-                                betterCountDownTimer.createCountDownTimer(millisUntilFinished);
-                                betterCountDownTimer2.countDownTimer.start();
+                if (isButtonTextEmpty(turnButton) && isButtonTextEmpty(turnButton2)) {
+                    changeButtonColor(betterCountDownTimer.button, betterCountDownTimer.getMillisUntilFinished(), userSetTime);
+                    betterCountDownTimer.createCountDownTimer(userSetTime);
+                    betterCountDownTimer2.createCountDownTimer(userSetTime);
+                    betterCountDownTimer.setPrevTime();
+                    betterCountDownTimer2.setPrevTime();
+                    betterCountDownTimer.countDownTimer.start();
+                    playerTurn.setTurn(true);
+                    refreshTurnIndicatorVis(true, false);
+                } else if (!playerTurn.isPaused()) {
+                    if (betterCountDownTimer.getPrevTime() - betterCountDownTimer.getMillisUntilFinished() > 1000) {
+                        if (betterCountDownTimer.getMillisUntilFinished() > 1999) {
+                            if (!isButtonTextEmpty(turnButton) || !isButtonTextEmpty(turnButton2)) {
+                                if (playerTurn.isTurn()) {
+                                    long millisUntilFinished = betterCountDownTimer.getMillisUntilFinished();
+                                    betterCountDownTimer.setPrevTime();
+                                    betterCountDownTimer.countDownTimer.cancel();
+                                    betterCountDownTimer.createCountDownTimer(millisUntilFinished);
+                                    betterCountDownTimer2.countDownTimer.start();
+                                }
                             }
+                            playerTurn.setTurn(false);
+                            playerTurn2.setTurn(true);
+                            refreshTurnIndicatorVis(false, true);
+                            toggleGreenTurnIndicator(false);
                         }
-                        playerTurn.setTurn(false);
-                        playerTurn2.setTurn(true);
                     }
                 }
             }
@@ -261,18 +285,32 @@ public class TimerMain extends AppCompatActivity {
         turnButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!playerTurn2.isPaused()) {
-                    if (betterCountDownTimer2.getMillisUntilFinished() > 1999) {
-                        if (!checkIfEmptyButtonText(turnButton) || !checkIfEmptyButtonText(turnButton2)) {
-                            if (playerTurn2.isTurn()) {
-                                long millisUntilFinished = betterCountDownTimer2.getMillisUntilFinished();
-                                betterCountDownTimer2.countDownTimer.cancel();
-                                betterCountDownTimer2.createCountDownTimer(millisUntilFinished);
-                                betterCountDownTimer.countDownTimer.start();
+                if (isButtonTextEmpty(turnButton) && isButtonTextEmpty(turnButton2)) {
+                    changeButtonColor(betterCountDownTimer2.button, betterCountDownTimer2.getMillisUntilFinished(), userSetTime);
+                    betterCountDownTimer.createCountDownTimer(userSetTime);
+                    betterCountDownTimer2.createCountDownTimer(userSetTime);
+                    betterCountDownTimer.setPrevTime();
+                    betterCountDownTimer2.setPrevTime();
+                    betterCountDownTimer2.countDownTimer.start();
+                    playerTurn2.setTurn(true);
+                    refreshTurnIndicatorVis(false, true);
+                } else if (!playerTurn2.isPaused()) {
+                    if (betterCountDownTimer2.getPrevTime() - betterCountDownTimer2.getMillisUntilFinished() > 1000) {
+                        if (betterCountDownTimer2.getMillisUntilFinished() > 1999) {
+                            if (!isButtonTextEmpty(turnButton) || !isButtonTextEmpty(turnButton2)) {
+                                if (playerTurn2.isTurn()) {
+                                    long millisUntilFinished = betterCountDownTimer2.getMillisUntilFinished();
+                                    betterCountDownTimer2.setPrevTime();
+                                    betterCountDownTimer2.countDownTimer.cancel();
+                                    betterCountDownTimer2.createCountDownTimer(millisUntilFinished);
+                                    betterCountDownTimer.countDownTimer.start();
+                                }
                             }
+                            playerTurn.setTurn(true);
+                            playerTurn2.setTurn(false);
+                            refreshTurnIndicatorVis(true, false);
+                            toggleGreenTurnIndicator(false);
                         }
-                        playerTurn2.setTurn(false);
-                        playerTurn.setTurn(true);
                     }
                 }
             }
@@ -285,62 +323,32 @@ public class TimerMain extends AppCompatActivity {
      * @param button Button UI element to have text field checked.
      * @return boolean true if empty string, else false.
      */
-    public boolean checkIfEmptyButtonText(Button button) {
+    public boolean isButtonTextEmpty(Button button) {
         return button.getText().toString().equals("");
     }
 
     /**
-     * Changes background color of button based on given time remaining.
-     * <p>
-     * 5 minutes > Green > 4 minutes
-     * <p>
-     * 4 minutes > Light Green > 3 minutes
-     * <p>
-     * 3 minutes > Light Orange > 2 minutes
-     * <p>
-     * 2 minutes > Orange > 1 minute
-     * <p>
-     * 1 minute > Red > 30 seconds
-     * <p>
-     * 30 seconds > Flashing Dark Red > 0 seconds
+     * Changes button background color based on time remaining
+     * cut into fifths
      *
      * @param button              Button UI element to have its color changed.
      * @param millisUntilFinished Amount of milliseconds remaining on timer.
+     * @param initialTime         Initial time set for timer by user (in ms).
      */
-    public void changeButtonColor(Button button, long millisUntilFinished) {
-        if (millisUntilFinished > 240000)
+    public void changeButtonColor(Button button, long millisUntilFinished, long initialTime) {
+        float ratio = ((float) millisUntilFinished / initialTime);
+        if (ratio > 0.8)
             button.setBackgroundColor(getResources().getColor(R.color.Five));
-        if ((millisUntilFinished < 239999) && (millisUntilFinished > 180000))
+        else if ((ratio <= 0.8) && (ratio > 0.6))
             button.setBackgroundColor(getResources().getColor(R.color.Four));
-        if ((millisUntilFinished < 179999) && (millisUntilFinished > 120000))
+        else if ((ratio <= 0.6) && (ratio > 0.4))
             button.setBackgroundColor(getResources().getColor(R.color.Three));
-        if ((millisUntilFinished < 119999) && (millisUntilFinished > 60000))
+        else if ((ratio <= 0.4) && (ratio > 0.2))
             button.setBackgroundColor(getResources().getColor(R.color.Two));
-        if ((millisUntilFinished < 59999) && (millisUntilFinished > 30000))
+        else if ((ratio <= 0.2) && (ratio > 0.1))
             button.setBackgroundColor(getResources().getColor(R.color.One));
-        if (millisUntilFinished < 29999) {
+        else if (ratio <= 0.1) {
             if ((((int) millisUntilFinished / 1000) % 2) != 0) {
-                button.setBackgroundColor(getResources().getColor(R.color.OneHalf));
-            } else button.setBackgroundColor(getResources().getColor(R.color.Gray));
-        }
-    }
-
-    /**
-     * Attempting to make color change adaptable
-     */
-    public void changeButtonColor2(Button button, long millisUntilFinished, long userSetTime) {
-        if (((float) (millisUntilFinished / userSetTime) > 0.8))
-            button.setBackgroundColor(getResources().getColor(R.color.Five));
-        if (((float) (millisUntilFinished / userSetTime) < 0.8) && ((float) (millisUntilFinished / userSetTime) > 0.6))
-            button.setBackgroundColor(getResources().getColor(R.color.Four));
-        if (((float) (millisUntilFinished / userSetTime) < 0.6) && ((float) (millisUntilFinished / userSetTime) > 0.4))
-            button.setBackgroundColor(getResources().getColor(R.color.Three));
-        if (((float) (millisUntilFinished / userSetTime) < 0.4) && ((float) (millisUntilFinished / userSetTime) > 0.2))
-            button.setBackgroundColor(getResources().getColor(R.color.Two));
-        if (((float) (millisUntilFinished / userSetTime) < 0.2) && ((float) (millisUntilFinished / userSetTime) > 0.1))
-            button.setBackgroundColor(getResources().getColor(R.color.One));
-        if (((float) (millisUntilFinished / userSetTime) < 0.1)) {
-            if ((((int) millisUntilFinished / 1000) % 2) == 0) {
                 button.setBackgroundColor(getResources().getColor(R.color.OneHalf));
             } else button.setBackgroundColor(getResources().getColor(R.color.Gray));
         }
@@ -355,5 +363,42 @@ public class TimerMain extends AppCompatActivity {
     public long minutesToMilliseconds(int num) {
         num *= 60000;
         return num;
+    }
+
+    /**
+     * Shows/hides halves of linear layout to show turn status.
+     *
+     * @param player1 if true, half toward player 1 will show
+     * @param player2 if true, half toward player 2 will show
+     */
+    public void refreshTurnIndicatorVis(boolean player1, boolean player2) {
+        View turnIndicator = findViewById(R.id.turnIndicator);
+        View turnIndicator2 = findViewById(R.id.turnIndicator2);
+        if (player1) {
+            turnIndicator.setVisibility(View.VISIBLE);
+            turnIndicator2.setVisibility(View.INVISIBLE);
+        } else if (player2) {
+            turnIndicator.setVisibility(View.INVISIBLE);
+            turnIndicator2.setVisibility(View.VISIBLE);
+        } else {
+            turnIndicator.setVisibility(View.INVISIBLE);
+            turnIndicator2.setVisibility(View.INVISIBLE);
+        }
+    }
+
+    /**
+     * Toggles turnIndicator color; true green, false white
+     * @param green true to toggle color to green, false for white
+     */
+    public void toggleGreenTurnIndicator(boolean green) {
+        View turnIndicator = findViewById(R.id.turnIndicator);
+        View turnIndicator2 = findViewById(R.id.turnIndicator2);
+        if (green) {
+            turnIndicator.setBackgroundColor(getResources().getColor(R.color.Five));
+            turnIndicator2.setBackgroundColor(getResources().getColor(R.color.Five));
+        } else {
+            turnIndicator.setBackgroundColor(getResources().getColor(R.color.White));
+            turnIndicator2.setBackgroundColor(getResources().getColor(R.color.White));
+        }
     }
 }
