@@ -12,7 +12,7 @@ Player taking first turn presses their own button, and again at the end of their
 
 After first turn, each player presses their own button to pause their clock and resume their opponent's.
 
-Players are only able to end turn after at least 1 second has passed (shown by a green turn indicator)
+Players are only able to end turn after at least 1 second has passed (shown by a green turn indicator).
 
 Short press center timer button to pause/resume.
 
