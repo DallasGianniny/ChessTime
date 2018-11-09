@@ -32,7 +32,7 @@ Long press center timer button to reset.
 
 ### Executing program
 
-* Download chosen APK file to device and install.
+* Download chosen APK file to device and install
 
 ![Starting Screen](https://i.imgur.com/DB0YQVK.png)
 ![Starting Screen Landscape](https://i.imgur.com/EkfhgbV.png)
