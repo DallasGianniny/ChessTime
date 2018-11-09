@@ -23,27 +23,36 @@ Long press center timer button to reset.
 ### Installing
 
 * APKs can be found in [ChessTime/app/release/](https://github.com/DallasGianniny/ChessTime/tree/master/app/release)
+* [v1.0.0](https://github.com/DallasGianniny/ChessTime/raw/master/app/release/ChessTime_1.0.0.apk)
+
 
 ### Executing program
 
 * Download chosen APK file to device and install.
 
-![Starting Screen](https://i.imgur.com/Fe5upUv.png)
-![Time Selection](https://i.imgur.com/LPowtln.png)
-![Immediately Following Time Selection](https://i.imgur.com/tHisCEF.png)
-![Timer Screen](https://i.imgur.com/mhYSXPv.png)
-![After User 1 Initiated First Turn](https://i.imgur.com/BAte0PL.png)
-![After User 1 And 2 Have Swapped Multiple Turns](https://i.imgur.com/QIJTHcj.png)
-![Landscape View](https://i.imgur.com/Y0WrYy2.png)
+![Starting Screen](https://i.imgur.com/DB0YQVK.png)
+![Starting Screen Landscape](https://i.imgur.com/EkfhgbV.png)
+![Low End Selection](https://i.imgur.com/N2IX08Y.png)
+![High End Selection](https://i.imgur.com/xl2DCOL.png)
+![Main Timer](https://i.imgur.com/WPNkCUt.png)
+![Main Timer Started](https://i.imgur.com/P1Zoy7l.png)
 
-(Images simulated on a Galaxy S4)
-
+(Images simulated on a Nexus X5)
 
 ## Author
 
 Dallas Gianniny  
 
 ## Version History
+* 1.0.0
+    * Changed time selection from discrete to continuous
+    * Added pause indicator
+* 0.9.4
+    * Turn button colors now adaptive
+    * Integrated first turn buttons into main buttons
+    * Added turn indicator
+    * Added one second minimum turn lockout and indicator
+    * Multiple fixed bugs
 * 0.9.3
     * Added app icon
     * Minor bug fixes
