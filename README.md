@@ -1,4 +1,4 @@
-![Landscape View](https://i.imgur.com/YEtbVO1.png)
+![App Logo](https://i.imgur.com/YEtbVO1.png)
 
 # ChessTime
 
@@ -6,9 +6,13 @@ Android app that emulates a two player chess clock.
 
 ## Description
 
-User selects a preset amount of time, then creates timer.
+Player selects an amount of time with top seekbar, then creates timer with bottom button.
 
-User may then start the timer at the beginning of their turn.
+Player taking first turn presses their own button, and again at the end of their turn.
+
+After first turn, each player presses their own button to pause their clock and resume their opponent's.
+
+Players are only able to end turn after at least 1 second has passed (shown by a green turn indicator)
 
 Short press center timer button to pause/resume.
 
