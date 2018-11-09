@@ -1,15 +1,17 @@
-///**
-// * This Android program can be used to replicate a physical two person chess timer.
-// *
-// * One player presses a startButton, with the turnButtons being used thereafter.
-// *
-// * The center resetButton can be short pressed to pause/resume the timers,
-// * and a long press restarts the timer by reloading the main activity.
-// *
-// * @author Dallas Gianniny
-// * @version 0.9.4
-// * @date November 7 2018
-// */
+/**
+ * This Android program can be used to replicate a physical two person chess timer.
+ * <p>
+ * Initial button press starts respective timer, additional button presses start opposite timer.
+ * <p>
+ * The center resetButton can be short pressed to pause/resume the timers,
+ * and a long press restarts the timer by reloading the main activity.
+ * <p>
+ * Initial time is set on start menu with top seek bar.
+ *
+ * @author Dallas Gianniny
+ * @version 1.0.0
+ * @date November 8 2018
+ */
 package com.example.dallas.chesstime;
 
 import android.annotation.SuppressLint;
@@ -26,12 +28,12 @@ import java.util.ArrayList;
 
 public class TimerMain extends AppCompatActivity {
 
-//    /**
-//     * Used for creating and displaying timers.
-//     *
-//     * BetterCountDownTimer uses built in CountDownTimer
-//     * in conjunction with UI elements to display a timer (secs).
-//     */
+    /**
+     * Used for creating and displaying timers.
+     * <p>
+     * BetterCountDownTimer uses built in CountDownTimer
+     * in conjunction with UI elements to display a timer (secs).
+     */
     class BetterCountDownTimer {
         private long millisUntilFinished;
         private long initialTime;
@@ -114,6 +116,9 @@ public class TimerMain extends AppCompatActivity {
         }
     }
 
+    /**
+     * Used to manage player turns and game pauses.
+     */
     class PlayerTurn {
         private boolean turn;
         private boolean paused;
@@ -144,60 +149,45 @@ public class TimerMain extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timer_main);
 
-//        /**
-//         * Attempts to get extra information from StartMenu activity.
-//         */
+        //Attempts to get extra information from StartMenu activity.
         Intent intent = getIntent();
         int num = intent.getIntExtra(StartMenu.EXTRA_NUM, 0);
-//        /**
-//         * Assigns amount of time for each player.
-//         */
+
+        //Assigns amount of time for each player.
         final long userSetTime = minutesToMilliseconds(num);
 
-//        /**
-//         * Hides status bar.
-//         *
-//         * Forces screen on.
-//         */
+        //Hides status bar.
+        //
+        //Forces screen on.
         getWindow().setFlags(AccessibilityNodeInfoCompat.ACTION_NEXT_HTML_ELEMENT, AccessibilityNodeInfoCompat.ACTION_NEXT_HTML_ELEMENT);
         getWindow().getDecorView().setSystemUiVisibility(3328);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
-//        /**
-//         * Assigns button UI elements by id.
-//         *
-//         * Names without the number 2 are associated with elements
-//         * on the nearest the physical bottom of the phone.
-//         */
+        //Assigns button UI elements by id.
+        //
+        //Names without the number 2 are associated with elements
+        //on the nearest the physical bottom of the phone.
         final Button turnButton = findViewById(R.id.button);
         final Button turnButton2 = findViewById(R.id.button2);
         final Button resetButton = findViewById(R.id.resetButton);
 
-//        /**
-//         * Assigns linear layout UI elements by id.
-//         * Hides turn indicator before game begins.
-//         */
+        //Assigns linear layout UI elements by id.
+        //Hides turn indicator before game begins.
         refreshTurnIndicatorVis(false, false);
 
-//        /**
-//         * Constructs instance of BetterCountDownTimer and PlayerTurn for each player.
-//         */
+        //Constructs instance of BetterCountDownTimer and PlayerTurn for each player.
         final BetterCountDownTimer betterCountDownTimer = new BetterCountDownTimer();
         final BetterCountDownTimer betterCountDownTimer2 = new BetterCountDownTimer();
         final PlayerTurn playerTurn = new PlayerTurn();
         final PlayerTurn playerTurn2 = new PlayerTurn();
 
-//        /**
-//         * Assigns button UI elements and initial time to respective timers.
-//         */
+        //Assigns button UI elements and initial time to respective timers.
         betterCountDownTimer.setButton(turnButton);
         betterCountDownTimer2.setButton(turnButton2);
         betterCountDownTimer.setInitialTime(userSetTime);
         betterCountDownTimer2.setInitialTime(userSetTime);
 
-//        /**
-//         * On resetButton long press, resets whole activity, effectively resetting timer.
-//         */
+        //On resetButton long press, resets whole activity, effectively resetting timer.
         resetButton.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -207,16 +197,16 @@ public class TimerMain extends AppCompatActivity {
                 return true;
             }
         });
-//        /**
-//         * On resetButton short press, pauses both timers.
-//         *
-//         * Must be short pressed a second time to resume play.
-//         */
+
+        //On resetButton short press, pauses both timers.
+        //
+        //Must be short pressed a second time to resume play.
+        //
         resetButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (!isButtonTextEmpty(turnButton) || !isButtonTextEmpty(turnButton2)) {
-                    if (!playerTurn.isPaused()) {
+                    if (!playerTurn.isPaused() && !playerTurn2.isPaused()) {
                         long millisUntilFinished = betterCountDownTimer.getMillisUntilFinished();
                         long millisUntilFinished2 = betterCountDownTimer2.getMillisUntilFinished();
                         betterCountDownTimer.countDownTimer.cancel();
@@ -224,31 +214,33 @@ public class TimerMain extends AppCompatActivity {
                         betterCountDownTimer.createCountDownTimer(millisUntilFinished);
                         betterCountDownTimer2.createCountDownTimer(millisUntilFinished2);
                         playerTurn.setPaused(true);
+                        playerTurn2.setPaused(true);
+                        toggleYellowTurnIndicator(true);
                     } else {
                         if (betterCountDownTimer.getMillisUntilFinished() > 1999 && betterCountDownTimer2.getMillisUntilFinished() > 1999) {
                             if (playerTurn.isTurn()) betterCountDownTimer.countDownTimer.start();
                             if (playerTurn2.isTurn()) betterCountDownTimer2.countDownTimer.start();
                             playerTurn.setPaused(false);
+                            playerTurn2.setPaused(false);
+                            toggleGreenTurnIndicator(true);
                         }
                     }
                 }
             }
         });
 
-//        /**
-//         * Main buttons used for starting and stopping timers
-//         * both at start and once game is already in motion.
-//         *
-//         * Checks if button texts are empty (game not started)
-//         * and if true starts timer.
-//         *
-//         * Checks if game is paused, if timer is greater than near zero,
-//         * if button(timer) texts are not empty, and if it is the player's turn.
-//         *
-//         * Modifies playerTurn.turn boolean flags.
-//         *
-//         * Attempts to force at least 1 second to pass each turn
-//         */
+        //Main buttons used for starting and stopping timers
+        //both at start and once game is already in motion.
+        //
+        //Checks if button texts are empty (game not started)
+        //and if true starts timer.
+        //
+        //Checks if game is paused, if timer is greater than near zero,
+        //if button(timer) texts are not empty, and if it is the player's turn.
+        //
+        //Modifies playerTurn.turn boolean flags.
+        //
+        //Attempts to force at least 1 second to pass each turn
         turnButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -366,7 +358,7 @@ public class TimerMain extends AppCompatActivity {
     }
 
     /**
-     * Shows/hides halves of linear layout to show turn status.
+     * Shows/hides halves of linear layout to indicate turn status.
      *
      * @param player1 if true, half toward player 1 will show
      * @param player2 if true, half toward player 2 will show
@@ -387,7 +379,8 @@ public class TimerMain extends AppCompatActivity {
     }
 
     /**
-     * Toggles turnIndicator color; true green, false white
+     * Toggles turnIndicator color
+     *
      * @param green true to toggle color to green, false for white
      */
     public void toggleGreenTurnIndicator(boolean green) {
@@ -396,6 +389,18 @@ public class TimerMain extends AppCompatActivity {
         if (green) {
             turnIndicator.setBackgroundColor(getResources().getColor(R.color.Five));
             turnIndicator2.setBackgroundColor(getResources().getColor(R.color.Five));
+        } else {
+            turnIndicator.setBackgroundColor(getResources().getColor(R.color.White));
+            turnIndicator2.setBackgroundColor(getResources().getColor(R.color.White));
+        }
+    }
+
+    public void toggleYellowTurnIndicator(boolean yellow) {
+        View turnIndicator = findViewById(R.id.turnIndicator);
+        View turnIndicator2 = findViewById(R.id.turnIndicator2);
+        if (yellow) {
+            turnIndicator.setBackgroundColor(getResources().getColor(R.color.Three));
+            turnIndicator2.setBackgroundColor(getResources().getColor(R.color.Three));
         } else {
             turnIndicator.setBackgroundColor(getResources().getColor(R.color.White));
             turnIndicator2.setBackgroundColor(getResources().getColor(R.color.White));

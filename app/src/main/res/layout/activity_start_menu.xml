@@ -60,6 +60,16 @@
             android:background="@color/colorPrimary"
             android:orientation="horizontal">
 
+            <SeekBar
+                android:id="@+id/seekBar"
+                style="@style/Widget.AppCompat.SeekBar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:max="59"
+                android:progress="29"
+                android:visibility="visible"
+                tools:layout_editor_absoluteX="8dp"
+                tools:layout_editor_absoluteY="68dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -120,24 +130,6 @@
         </LinearLayout>
 
     </LinearLayout>
-
-    <Spinner
-        android:id="@+id/minutesSelectSpinner"
-        style="@style/Widget.AppCompat.Spinner"
-        android:layout_width="35dp"
-        android:layout_height="wrap_content"
-
-        android:layout_marginEnd="18dp"
-        android:dropDownWidth="47dp"
-        android:fadingEdge="vertical"
-        android:spinnerMode="dialog"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/guideline"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/linearLayout2">
-
-    </Spinner>
 
     <TextView
         android:id="@+id/selectedTimeText"
