@@ -9,8 +9,8 @@
  * Initial time is set on start menu with top seek bar.
  *
  * @author Dallas Gianniny
- * @version 1.0.0
- * @date November 8 2018
+ * @version 1.0.1
+ * @date December 4 2018
  */
 package com.example.dallas.chesstime;
 
