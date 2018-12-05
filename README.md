@@ -27,7 +27,7 @@ Long press center timer button to reset.
 ### Installing
 
 * APKs can be found in [ChessTime/app/release/](https://github.com/DallasGianniny/ChessTime/tree/master/app/release)
-* [v1.0.0](https://github.com/DallasGianniny/ChessTime/raw/master/app/release/ChessTime_1.0.0.apk)
+* [v1.0.1](https://github.com/DallasGianniny/ChessTime/raw/master/app/release/ChessTime_1.0.1.apk)
 
 
 ### Executing program
@@ -48,6 +48,8 @@ Long press center timer button to reset.
 Dallas Gianniny  
 
 ## Version History
+* 1.0.1
+    * Added clarifying text for time selector
 * 1.0.0
     * Changed time selection from discrete to continuous
     * Added pause indicator
