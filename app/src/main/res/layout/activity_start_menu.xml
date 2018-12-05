@@ -70,6 +70,7 @@
                 android:visibility="visible"
                 tools:layout_editor_absoluteX="8dp"
                 tools:layout_editor_absoluteY="68dp" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -147,6 +148,24 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/linearLayout2"
         tools:text="XX:XX" />
+
+    <TextView
+        android:id="@+id/selectHintText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="top"
+        android:text="@string/select"
+        android:textAlignment="center"
+        android:textColor="@color/Three"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:typeface="monospace"
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/linearLayout2"
+        app:layout_constraintVertical_bias="0.1000000" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline"

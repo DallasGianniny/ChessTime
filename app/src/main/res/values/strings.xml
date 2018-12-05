@@ -6,6 +6,7 @@
     <string name="player_1">Player 1</string>
     <string name="player_2">Player 2</string>
     <string name="press_to_open_timer">CREATE TIMER</string>
+    <string name="select">SELECT</string>
 
     <string-array name="numeric_labels_array">
         <item>1</item>
