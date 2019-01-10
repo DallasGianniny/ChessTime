@@ -20,9 +20,9 @@ Long press center timer button to reset.
 
 ## Getting Started
 
-### Dependencies
+### Requirements
 
-* Requires Android 5.0.1 or newer
+* Android 5.0.1 or newer
 
 ### Installing
 
